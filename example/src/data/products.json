@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1700726158,
+        "price": "$100",
+        "imageUrl": "https://pagedone.io/asset/uploads/1700726158.png",
+        "name": "Face cream",
+        "categoryName": "Orange & Aloe Vera"
+    },
+    {
+        "id": 1700726174,
+        "price": "$40",
+        "imageUrl": "https://pagedone.io/asset/uploads/1700726174.png",
+        "name": "Plstic bottle",
+        "categoryName": "Black color"
+    },
+    {
+        "id": 1700726191,
+        "price": "$100",
+        "imageUrl": "https://pagedone.io/asset/uploads/1700726191.png",
+        "name": "Men cream",
+        "categoryName": "Aloe Vera and Neem"
+    },
+    {
+        "id": 1700726207,
+        "price": "$100",
+        "imageUrl": "https://pagedone.io/asset/uploads/1700726207.png",
+        "name": ">Cold Perfume",
+        "categoryName": "White perfume"
+    }
+]
