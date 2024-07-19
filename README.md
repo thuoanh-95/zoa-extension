@@ -13,6 +13,7 @@ Install the latest version of  [Node.js](https://nodejs.org/en/download/) and [n
 You has registered a app on zalo developer (https://developers.zalo.me/)
 
 Install ZOA CLI last version
+    <p>&nbsp;</p>
     - Yarn : yarn i -g zoa-cli 
     <p>&nbsp;</p>
     - npm : npm i -g zoa-cli
@@ -26,9 +27,9 @@ Note : Current version only support vite and react for develop extension.
 
 ## Develop extension with ZOA CLI
 Command line
-  - zoa init : Init new project( required input zalo appId)
-  - zoa login : Login to deploy source
-  - zoa build : Build source by vitejs
-  - zoa deploy : Deploy source.
+  - zoa init: Init new project (required input Zalo AppId)
+  - zoa login: Login to deploy source
+  - zoa build: Build source by vitejs
+  - zoa deploy: Deploy source
 
-Manage source deploy : https://developers.zalo.me/app/{appId}/marketplace/versions
+Manage source deploy : https://developers.zalo.me/app/{appId}/extension/versions
