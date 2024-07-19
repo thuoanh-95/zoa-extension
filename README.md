@@ -2,7 +2,7 @@
 
 With the Zalo OA Extension Command Line Interface (ZOA CLI 0.0.1-beta), you can:
 
-- initialize, build, dev and deploy OA Extension.
+- Initialize, build, develop, and deploy the OA Extension.
 
 
 
@@ -12,9 +12,9 @@ Install the latest version of  [Node.js](https://nodejs.org/en/download/) and [n
 
 You have registered an app on Zalo Developer (https://developers.zalo.me/)
 
-Install ZOA CLI last version
+Install the latest version of ZOA CLI:
 
-    Yarn: yarn i -g zoa-cli 
+    yarn: yarn i -g zoa-cli 
     
     npm: npm i -g zoa-cli
 
@@ -26,10 +26,10 @@ Note: The current version only supports Vite and React for developing extension.
 <p>&nbsp;</p>
 
 ## Develop extension with ZOA CLI
-Command line
-  - zoa init: Init new project (required input Zalo App ID)
-  - zoa login: Login to deploy source
-  - zoa build: Build source by Vite.js
+Command Line:
+  - zoa init: Initialize a new project (requires Zalo App ID input)
+  - zoa login: Log in to deploy source
+  - zoa build: Build source using Vite.js
   - zoa deploy: Deploy source
 
-Manage source deploy : https://developers.zalo.me/app/{appId}/extension/versions
+Manage source deploy: https://developers.zalo.me/app/{appId}/extension/versions
