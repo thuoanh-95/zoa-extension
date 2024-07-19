@@ -20,7 +20,7 @@ Install ZOA CLI last version
 
 
 ``
-Note: The current version only supports Vite and React for developing extensions.
+Note: The current version only supports Vite and React for developing extension.
 ``
 
 <p>&nbsp;</p>
