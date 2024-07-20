@@ -1,6 +1,6 @@
 {
   "name": "zoa-cli",
-  "version": "0.0.1",
+  "version": "0.0.1-beta",
   "description": "Comment Line Utility for ZOA Extension",
   "author": "Zalo Platform",
   "license": "MIT",
