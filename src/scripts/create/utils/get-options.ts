@@ -3,7 +3,6 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 import { projectFramework } from "../../../config/constant";
 
-
 // const moreOptionsText = chalk.italic(`\t- Including Tailwind CSS`);
 const questions = [
   {
@@ -31,7 +30,6 @@ const questions = [
   {
     type: "list",
     name: "framework",
-    when: (opts) => opts.package == "zmp-ui",
     message: "What type of framework/library do you prefer?",
     choices: [
       {
@@ -65,9 +63,7 @@ export default function getOptions() {
     if (!options.stateManagement) {
       options.stateManagement = "store";
     }
-    if (options.package === "zmp-ui") {
-      options.stateManagement = "recoil";
-    }
+
     delete options.themingCustomColor;
     delete options.themingColor;
     delete options.themingIconFonts;

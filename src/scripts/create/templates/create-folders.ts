@@ -1,7 +1,7 @@
 import path from "path";
 import fse from "../../../utils/fs-extra";
 
-export default function createFolder(options: any) {
+export default function createFolders(options: any) {
   const cwd = options.cwd || process.cwd();
 
   const srcFolder = "src";
@@ -17,6 +17,6 @@ export default function createFolder(options: any) {
   }
 
   folders.forEach((f) => {
-    fse.mkdirSync(path.resolve(cwd, f));
+    if (!fse.existsSync(f)) fse.mkdirSync(path.resolve(cwd, f));
   });
 }

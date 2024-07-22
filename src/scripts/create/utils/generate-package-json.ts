@@ -4,7 +4,7 @@ export default function generatePackageJson(options: any) {
   const { framework, name } = options;
 
   const dependencies = [];
-  const dependenciesReact = ["react", "react-dom"];
+  const dependenciesReact = ["react", "react-dom", "react-router-dom"];
 
   dependencies.push(...dependenciesReact);
 
