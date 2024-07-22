@@ -138,10 +138,22 @@ export default async function (
     return;
   }
 
-  // Generate .gitignore
-  const gitignoreContent = generateGitignore(options);
+  // Create Project Files
+  // logger.statusStart("Creating project files");
+  const filesToCopy = copyAssets(options);
   try {
-    fse.writeFileSync(path.join(cwd, ".gitignore"), gitignoreContent);
+    // eslint-disable-next-line
+    await Promise.all(
+      filesToCopy.map((f) => {
+        if (f.from) {
+          fse.copyFileAsync(f.from, f.to);
+        }
+        if (f.content) {
+          fse.writeFileAsync(f.to, f.content);
+        }
+        return Promise.resolve();
+      })
+    );
   } catch (err) {
     logger.statusError("Error creating project files");
     // if (err) logger.error(err.stderr || err);
@@ -149,22 +161,10 @@ export default async function (
     return;
   }
 
-  // Create Project Files
-  logger.statusStart("Creating project files");
-  const filesToCopy = copyAssets(options);
+  // Generate .gitignore
+  const gitignoreContent = generateGitignore(options);
   try {
-    // eslint-disable-next-line
-    await Promise.all(
-      filesToCopy.map((f) => {
-        if (f.from) {
-          return fse.copyFileAsync(f.from, f.to);
-        }
-        if (f.content) {
-          return fse.writeFileAsync(f.to, f.content);
-        }
-        return Promise.resolve();
-      })
-    );
+    fse.writeFileSync(path.join(cwd, ".gitignore"), gitignoreContent);
   } catch (err) {
     logger.statusError("Error creating project files");
     // if (err) logger.error(err.stderr || err);
