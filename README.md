@@ -14,7 +14,7 @@ You have registered an app on Zalo Developer (https://developers.zalo.me/)
 
 Install the latest version of ZOA CLI:
 
-    yarn: yarn i -g zoa-cli 
+    yarn: yarn global add zoa-cli 
     
     npm: npm i -g zoa-cli
 
