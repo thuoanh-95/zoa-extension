@@ -10,6 +10,7 @@ import { generateNpmScripts } from "./utils/generate-npm-scripts";
 import chalk from "chalk";
 import generateReadme from "./utils/generate-readme";
 import generateGitignore from "./utils/generate-gitignore";
+import copyAssets from "./templates/copy-assets";
 
 const waitText = chalk.gray("(Please wait, it can take a while)");
 
@@ -148,5 +149,27 @@ export default async function (
     return;
   }
 
+  // Create Project Files
+  logger.statusStart("Creating project files");
+  const filesToCopy = copyAssets(options);
+  try {
+    // eslint-disable-next-line
+    await Promise.all(
+      filesToCopy.map((f) => {
+        if (f.from) {
+          return fse.copyFileAsync(f.from, f.to);
+        }
+        if (f.content) {
+          return fse.writeFileAsync(f.to, f.content);
+        }
+        return Promise.resolve();
+      })
+    );
+  } catch (err) {
+    logger.statusError("Error creating project files");
+    // if (err) logger.error(err.stderr || err);
+    errorExit(err);
+    return;
+  }
   logger.statusDone("Creating project files");
 }

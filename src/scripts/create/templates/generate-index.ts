@@ -1,13 +1,30 @@
+import { projectFramework } from "../../../config/constant";
+import indent from "../utils/indent";
+
 export default function generateIndex(options) {
+  const { framework, name } = options;
   const srcFolder = "/src/";
 
   const rootContent = "";
-  const scripts = `
-    <!-- built script files will be auto injected -->
-   <script type="module" src="${srcFolder}index.ts"></script>
-    `.trim();
+  let scripts = "";
 
-  return `
+  if (framework === projectFramework.REACT) {
+    scripts = `
+    <!-- built script files will be auto injected -->
+   <script type="module" src="${srcFolder}/index.js"></script>
+    `.trim();
+  }
+
+  if (framework === projectFramework.REACT_TYPESCRIPT) {
+    scripts = `
+    <!-- built script files will be auto injected -->
+   <script type="module" src="${srcFolder}/index.ts"></script>
+    `.trim();
+  }
+
+  return indent(
+    0,
+    `
     <!DOCTYPE html>
     <html>
     <head>
@@ -17,12 +34,13 @@ export default function generateIndex(options) {
     
       <meta name="format-detection" content="telephone=no">
       <meta name="msapplication-tap-highlight" content="no">
-      <title>${name}</title>
+      <title>${name || "ZOA Extensions"}</title>
     </head>
     <body>
       <div id="app">${rootContent}</div>
       ${scripts}
     </body>
     </html>
-      `.trim();
+    `
+  ).trim();
 }
