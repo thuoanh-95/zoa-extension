@@ -1,12 +1,17 @@
 import path from "path";
+import exec from "exec-sh";
 import fse from "../../utils/fs-extra";
 import * as log from "../../utils/log";
 import generateAppConfig from "./utils/generate-app-config";
 import config from "../../config";
 import generatePackageJson from "./utils/generate-package-json";
-import createFolder from "./templates/create-folders";
+import createFolders from "./templates/create-folders";
 import { generateNpmScripts } from "./utils/generate-npm-scripts";
+import chalk from "chalk";
+import generateReadme from "./utils/generate-readme";
+import generateGitignore from "./utils/generate-gitignore";
 
+const waitText = chalk.gray("(Please wait, it can take a while)");
 
 export default async function (
   options: any,
@@ -60,15 +65,88 @@ export default async function (
 
   logger.statusDone("Generating package.json");
 
-
   // Create Folders
-  logger.statusStart('Creating required folders structure');
+  logger.statusStart("Creating required folders structure");
   try {
-    createFolder(options);
+    createFolders(options);
   } catch (err) {
-    logger.statusError('Error creating required folders structure');
-    // if (err) logger.error(err.stderr);
+    logger.statusError("Error creating required folders structure");
+    if (err) logger.error(err.stderr);
     errorExit(err);
   }
-  logger.statusDone('Creating required folders structure');
+  logger.statusDone("Creating required folders structure");
+
+  // Install NPM depenencies
+  logger.statusStart(`${"Installing NPM Dependencies"} ${waitText}`);
+  try {
+    if (!isRunningInCwd) {
+      await exec.promise(
+        `cd ${cwd.replace(
+          / /g,
+          "\\ "
+        )} && npm install ${packageJson.dependencies.join(" ")} --save`,
+        true
+      );
+    } else {
+      await exec.promise(
+        `npm install ${packageJson.dependencies.join(" ")} --save`,
+        true
+      );
+    }
+  } catch (err) {
+    logger.statusError("Error installing NPM Dependencies");
+    // if (err) logger.error(err.stderr);
+    errorExit(err);
+    return;
+  }
+  logger.statusDone("Installing NPM Dependencies");
+
+  // Install NPM dev depenencies
+  logger.statusStart(`${"Installing NPM Dev Dependencies"} ${waitText}`);
+  try {
+    if (!isRunningInCwd) {
+      await exec.promise(
+        `cd ${cwd.replace(
+          / /g,
+          "\\ "
+        )} && npm install ${packageJson.devDependencies.join(" ")} --save-dev`,
+        true
+      );
+    } else {
+      await exec.promise(
+        `npm install ${packageJson.devDependencies.join(" ")} --save-dev`,
+        true
+      );
+    }
+  } catch (err) {
+    logger.statusError("Error installing NPM Dev Dependencies");
+    // if (err) logger.error(err.stderr);
+    errorExit(err);
+    return;
+  }
+  logger.statusDone("Installing NPM Dev Dependencies");
+
+  // Generate Readme
+  const readMeContent = generateReadme(options);
+  try {
+    fse.writeFileSync(path.join(cwd, "README.md"), readMeContent);
+  } catch (err) {
+    logger.statusError("Error creating project files");
+    // if (err) logger.error(err.stderr || err);
+    errorExit(err);
+    return;
+  }
+
+  // Generate .gitignore
+  const gitignoreContent = generateGitignore(options);
+  try {
+    fse.writeFileSync(path.join(cwd, ".gitignore"), gitignoreContent);
+  } catch (err) {
+    logger.statusError("Error creating project files");
+    // if (err) logger.error(err.stderr || err);
+    errorExit(err);
+    return;
+  }
+
+  logger.statusDone("Creating project files");
 }
