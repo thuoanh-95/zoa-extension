@@ -1,6 +1,7 @@
 import path from "path";
 import { projectFramework } from "../../../config/constant";
-import copyAsset from "./react/copy-assets";
+import copyReactAssets from "./react/copy-assets";
+import copyReactTSAssets from "./react-typescript/copy-assets";
 import generateIndex from "./generate-index";
 
 export default function (options: any) {
@@ -12,7 +13,11 @@ export default function (options: any) {
   const toCopy = [];
 
   if (framework === projectFramework.REACT) {
-    toCopy.push(...copyAsset(options));
+    toCopy.push(...copyReactAssets(options));
+  }
+
+  if (framework === projectFramework.REACT_TYPESCRIPT) {
+    toCopy.push(...copyReactTSAssets(options));
   }
 
   toCopy.push({

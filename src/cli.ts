@@ -63,7 +63,6 @@ program
     const opts = await getOptions();
 
     await create(opts, logger);
-    console.log(opts);
     process.exit(0);
   });
 

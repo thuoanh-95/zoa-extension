@@ -3,7 +3,7 @@ import indent from "../utils/indent";
 
 export default function generateIndex(options) {
   const { framework, name } = options;
-  const srcFolder = "/src/";
+  const srcFolder = "/src";
 
   const rootContent = "";
   let scripts = "";

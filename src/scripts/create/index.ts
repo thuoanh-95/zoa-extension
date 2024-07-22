@@ -139,21 +139,18 @@ export default async function (
   }
 
   // Create Project Files
-  // logger.statusStart("Creating project files");
+  logger.statusStart("Creating project files");
   const filesToCopy = copyAssets(options);
   try {
-    // eslint-disable-next-line
-    await Promise.all(
-      filesToCopy.map((f) => {
-        if (f.from) {
-          fse.copyFileAsync(f.from, f.to);
-        }
-        if (f.content) {
-          fse.writeFileAsync(f.to, f.content);
-        }
-        return Promise.resolve();
-      })
-    );
+    filesToCopy.map((f) => {
+      if (f.from) {
+        return fse.copyFileSync(f.from, f.to);
+      }
+      if (f.content) {
+        return fse.writeFileSync(f.to, f.content);
+      }
+      return null;
+    });
   } catch (err) {
     logger.statusError("Error creating project files");
     // if (err) logger.error(err.stderr || err);
