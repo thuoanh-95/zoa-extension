@@ -14,8 +14,10 @@ import getLoginOptions from "./scripts/login/get-options";
 import spinner from "./utils/spinner";
 import buildApp from "./scripts/build";
 import deployApp from "./scripts/deploy";
-import getOptions from "./create/utils/get-options";
+
 import getDeployOptions from "./scripts/deploy/get-deploy-options";
+import create from "./scripts/create";
+import getOptions from "./scripts/create/utils/get-options";
 
 const cwd = process.cwd();
 const program = new Command();
@@ -59,6 +61,8 @@ program
       setEnv(config.env.appId, optsLogin.appId);
     await loginApp({ cwd, ...optsLogin }, logger);
     const opts = await getOptions();
+
+    await create(opts, logger);
     console.log(opts);
     process.exit(0);
   });
@@ -102,11 +106,11 @@ program
   .command("deploy")
   .option("-D, --dev", "Deploy in Development server")
   .option("-M, --mode <m>", "Env mode")
-  .option("-p, --passive", "Passive mode (non-interactive)")
-  .option("-e, --existing", "Deploy existing project")
-  .option("-t, --testing", "Deploy testing version")
-  .option("-m, --desc <message>", "Version description")
-  .option("-o, --outputDir <output>", "Output folder. Default www")
+  // .option("-p, --passive", "Passive mode (non-interactive)")
+  // .option("-e, --existing", "Deploy existing project")
+  // .option("-t, --testing", "Deploy testing version")
+  // .option("-m, --desc <message>", "Version description")
+  // .option("-o, --outputDir <output>", "Output folder. Default www")
   .option(
     "-P, --port <n>",
     "Specify UI server port. By default it is 3001",

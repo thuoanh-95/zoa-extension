@@ -1,4 +1,8 @@
 import qrcode from "qrcode-terminal";
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8fcbbeda82a46f218486af352463f6a1098613e
 import { axiosClient } from "../../utils/axios";
 import logSymbols from "log-symbols";
 import chalk from "chalk";
@@ -90,6 +94,10 @@ export async function loginApp(options: any, logger?: any) {
     }
   } catch (err) {
     console.error("Error occurred:", err);
+<<<<<<< HEAD
+=======
+    logger.statusError("Login fail!")
+>>>>>>> d8fcbbeda82a46f218486af352463f6a1098613e
     throw err;
   } finally {
     spinner.stop();
