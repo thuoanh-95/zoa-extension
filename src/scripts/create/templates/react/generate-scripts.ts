@@ -1,6 +1,6 @@
 import indent from "../../utils/indent";
 
-export default function () {
+export default function (options: any) {
   let scripts = "";
 
   scripts += indent(
@@ -9,6 +9,7 @@ export default function () {
           // Import React and ReactDOM
           import React from 'react';
           import { createRoot } from 'react-dom/client';
+          import App from './components/App.jsx';
   
           // Mount React App
           const root = createRoot(document.getElementById('app'));
