@@ -19,13 +19,13 @@ const map = {
     default: {
       s: {
         icon: '🔥',
-        script: 'vite',
+        script: 'zoa start',
         description: 'run development server',
       },
       r: {
         icon: '🙏',
         script: 'zoa deploy',
-        description: 'deploy mini app for production',
+        description: 'deploy zoa extension',
       },
     },
     httpServer: {
