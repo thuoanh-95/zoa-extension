@@ -19,7 +19,7 @@ const map = {
     default: {
       s: {
         icon: '🔥',
-        script: 'zoa start',
+        script: 'vite',
         description: 'run development server',
       },
       r: {

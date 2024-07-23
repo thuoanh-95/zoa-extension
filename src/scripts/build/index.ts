@@ -66,7 +66,9 @@ export default async function buildApp(
       nextVersion = 1;
     }
 
-    let viteConfig = "vite.config.js";
+    let viteConfig = fse.existsSync("vite.config.ts")
+      ? "vite.config.ts"
+      : "vite.config.js";
 
     const res = await build({
       configFile: path.join(cwd, viteConfig),

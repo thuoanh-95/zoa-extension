@@ -91,11 +91,9 @@ export default async function deployApp(
       description,
     };
 
-    const uploadRes = await uploadChunk(buffer, "public.zip", options, {
+    await uploadChunk(buffer, "public.zip", options, {
       Authorization: `Bearer ${getEnv(config.env.token)}`,
     });
-
-    console.log(uploadRes);
   } catch (err) {
     console.log(err.response);
     logger.statusError("Error deploying your app");
