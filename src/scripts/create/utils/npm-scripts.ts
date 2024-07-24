@@ -25,7 +25,7 @@ const map = {
       r: {
         icon: '🙏',
         script: 'zoa deploy',
-        description: 'deploy mini app for production',
+        description: 'deploy zoa extension',
       },
     },
     httpServer: {

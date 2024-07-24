@@ -14,7 +14,7 @@ import getLoginOptions from "./scripts/login/get-options";
 import spinner from "./utils/spinner";
 import buildApp from "./scripts/build";
 import deployApp from "./scripts/deploy";
-
+import startApp from "./scripts/start";
 import getDeployOptions from "./scripts/deploy/get-deploy-options";
 import create from "./scripts/create";
 import getOptions from "./scripts/create/utils/get-options";
@@ -59,11 +59,15 @@ program
     console.log("optsLogin", optsLogin);
     if (optsLogin.appId && !getEnv(config.env.appId))
       setEnv(config.env.appId, optsLogin.appId);
-    await loginApp({ cwd, ...optsLogin }, logger);
-    const opts = await getOptions();
+    try {
+      await loginApp({ cwd, ...optsLogin }, logger);
+      const opts = await getOptions();
 
-    await create(opts, logger);
-    process.exit(0);
+      await create(opts, logger);
+    } catch (err) {
+      logger.statusError(err);
+      process.exit(0);
+    }
   });
 
 program
@@ -94,6 +98,42 @@ program
     await buildApp(
       {
         cwd,
+      },
+      logger
+    );
+    process.exit(0);
+  });
+
+program
+  .usage("<command> [options]")
+  .command("start")
+  .option(
+    "-iosH, --ios-host-name <n>",
+    "Specify server hostname. By default it is os.hostname"
+  )
+  .option(
+    "-P, --port <n>",
+    "Specify server port. By default it is 3000",
+    parseInt
+  )
+  .option("-Z, --zalo-app", "Preview on Zalo")
+  .option("-ios, --ios", "Run on ios")
+  .option("-nF, --no-frame", "Run without Zalo frame")
+  .option("-D, --device", "Device mode")
+  .option("-M, --mode <m>", "Env mode")
+  .description("Start a ZMP project")
+  .action(async (options) => {
+    const currentProject = getCurrentProject(cwd);
+
+    if (!currentProject) {
+      log.text(`${logSymbols.error} This is not ZMP project`);
+      process.exit(1);
+    }
+    await startApp(
+      {
+        cwd,
+        port: (options && options.port) || 3000,
+        mode: options && options.mode,
       },
       logger
     );
