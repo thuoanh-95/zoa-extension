@@ -20,7 +20,7 @@ const routes = [{
 }]
 
 
-const router = createBrowserRouter(routes, { basename: `/extensions/${appId}` })
+const router = createBrowserRouter(routes, { basename: `/extension/${appId}` })
 
 
 export default function App() {
