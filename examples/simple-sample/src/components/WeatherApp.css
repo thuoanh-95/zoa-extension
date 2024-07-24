@@ -1,0 +1,68 @@
+/* WeatherApp.css */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  background: #f7f7f7;
+  color: #555;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+}
+
+.app.warm {
+  background: linear-gradient(to bottom, #ff7300, #ffb347, #ffcc33);
+}
+
+.search-box {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  font-size: 20px;
+}
+
+.location-box {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.location {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 20px;
+}
+
+.weather-box {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.temp {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.weather {
+  font-size: 32px;
+}
+
+.hi-low {
+  font-size: 24px;
+}

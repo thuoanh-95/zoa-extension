@@ -5,8 +5,10 @@ import ProductDetail from "../views/product-detail";
 import Settings from "../views/settings";
 
 
+const appId = process.env.APP_ID;
+
 const routes = [{
-  path: "/zone",
+  path: "/zone/admin-dashboard-primary-area-block",
   element: <Products />,
 }, {
   path: "/settings",
@@ -14,10 +16,11 @@ const routes = [{
 }, {
   path: "/products/:id",
   element: <ProductDetail />,
+
 }]
 
 
-const router = createBrowserRouter(routes, { basename: "/extensions/3126224783690575731" })
+const router = createBrowserRouter(routes, { basename: `/extension/${appId}` })
 
 
 export default function App() {
