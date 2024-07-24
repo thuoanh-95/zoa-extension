@@ -65,6 +65,7 @@ export default async function (
       },
       server: {
         port,
+        host,
       },
     });
 

@@ -1,6 +1,7 @@
 {
   "exclude": ["dist", "node_modules", "bin", "example"],
   "compilerOptions": {
+    "jsx": "react",
     "rootDir": "src",
     "outDir": "dist",
     "target": "es6",
