@@ -1,6 +1,6 @@
 # ZOA CLI
 
-With the Zalo OA Extension Command Line Interface (ZOA CLI 0.0.1-beta), you can:
+With the Zalo OA Extension Command Line Interface (ZOA CLI), you can:
 
 - Initialize, build, develop, and deploy the OA Extension.
 
