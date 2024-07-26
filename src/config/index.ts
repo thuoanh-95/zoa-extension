@@ -1,5 +1,5 @@
 export default {
-  api_domain: "https://dev-marketplace.zapps.me",
+  api_domain: "https://marketplace.zapps.me",
   root_env: () => `${process.cwd()}/.env`,
   env: {
     appId: "APP_ID",

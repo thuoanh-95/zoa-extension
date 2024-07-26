@@ -56,7 +56,6 @@ program
       process.exit(1);
     }
     const optsLogin = await getLoginOptions();
-    console.log("optsLogin", optsLogin);
     if (optsLogin.appId && !getEnv(config.env.appId))
       setEnv(config.env.appId, optsLogin.appId);
     try {
@@ -108,20 +107,11 @@ program
   .usage("<command> [options]")
   .command("start")
   .option(
-    "-iosH, --ios-host-name <n>",
-    "Specify server hostname. By default it is os.hostname"
-  )
-  .option(
     "-P, --port <n>",
     "Specify server port. By default it is 3000",
     parseInt
   )
-  .option("-Z, --zalo-app", "Preview on Zalo")
-  .option("-ios, --ios", "Run on ios")
-  .option("-nF, --no-frame", "Run without Zalo frame")
-  .option("-D, --device", "Device mode")
-  .option("-M, --mode <m>", "Env mode")
-  .description("Start a ZMP project")
+  .description("Start a ZOA Extension project")
   .action(async (options) => {
     const currentProject = getCurrentProject(cwd);
 

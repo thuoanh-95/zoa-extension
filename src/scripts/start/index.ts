@@ -4,6 +4,7 @@ import { getEnv } from "../../utils/env";
 import config from "../../config";
 import fse from "../../utils/fs-extra";
 import path from "path";
+import chalk from "chalk";
 
 const spinner = ora("Starting zoa extension...");
 
@@ -49,7 +50,7 @@ export default async function (
     },
   };
 
-  let viteConfig = "vite.config.js";
+  let viteConfig = "vite.config.mjs";
   const isTypeScriptProject = fse.existsSync(path.join(cwd, "vite.config.ts"));
   if (isTypeScriptProject) {
     viteConfig = "vite.config.ts";
@@ -70,11 +71,15 @@ export default async function (
     });
 
     await server.listen();
+    const info = server.config.logger.info;
+    info(chalk.green(`Server is running at: ${port}`));
+    server?.printUrls();
+    
   } catch (err) {
     logger.statusError("Error starting project");
     // if (err) logger.error(err.stderr || err);
-    logger.error(err);
-    errorExit(err);
+    // logger.error(err);
+    // errorExit(err);
     return;
   }
 }

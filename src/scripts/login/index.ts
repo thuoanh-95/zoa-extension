@@ -24,20 +24,22 @@ export async function fetchQRCode(url, appId) {
     await checkLogin(url);
   } catch (error) {
     console.error("Error occurred:", error);
+    throw error;
   }
 }
 
 function generateQRCode(qrData) {
   qrcode.generate(qrData, { small: true }, function (qrcode) {
-    const qrCode = `${logSymbols.info} ${chalk.bold(`Scan the QR code with Zalo App:\n${qrcode}`)}`;
+    const qrCode = `${logSymbols.info} ${chalk.bold(
+      `Scan the QR code with Zalo App:\n${qrcode}`
+    )}`;
     text(qrCode);
   });
 }
 
 async function checkLogin(url, attempts = 0) {
   if (attempts >= 60) {
-    ora(chalk.gray("Maximum attempts reached."));
-    return;
+    throw new Error("Maximum attempts reached.");
   }
 
   try {
@@ -54,10 +56,25 @@ async function checkLogin(url, attempts = 0) {
       await checkLogin(url, attempts + 1);
     }
   } catch (error) {
+    // console.log(error);
     if (attempts < 60) {
       await delay(1000);
       await checkLogin(url, attempts + 1);
+    } else {
+      throw error;
     }
+  }
+}
+
+async function verifyToken(accessToken: string) {
+  try {
+    const result = await axiosClient.post(
+      `${config.api_domain}/api/auth/verify`,
+      { accessToken }
+    );
+    return result;
+  } catch (err) {
+    throw err;
   }
 }
 
@@ -86,12 +103,12 @@ export async function loginApp(options: any, logger?: any) {
     if (loginMethod === "Zalo") {
       await fetchQRCode(authPath, appId);
       logger.statusDone("Login Success!");
-
-      return Promise.resolve();
+    } else {
+      await verifyToken(token);
     }
   } catch (err) {
-    console.error("Error occurred:", err);
-    logger.statusError("Login fail!")
+    // console.error("Error occurred:", err);
+    logger.statusError("Login fail!");
     throw err;
   } finally {
     spinner.stop();
