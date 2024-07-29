@@ -50,7 +50,7 @@ export default async function (
     },
   };
 
-  let viteConfig = "vite.config.mjs";
+  let viteConfig = "vite.config.js";
   const isTypeScriptProject = fse.existsSync(path.join(cwd, "vite.config.ts"));
   if (isTypeScriptProject) {
     viteConfig = "vite.config.ts";

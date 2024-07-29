@@ -20,7 +20,7 @@ export default function generatePackageJson(options: any) {
 
   // Scripts
   const scripts: any = {};
-  generateNpmScripts().forEach((s) => {
+  generateNpmScripts(["s", "r", "d"]).forEach((s) => {
     scripts[s.name] = s.script;
   });
   const postInstall = [];

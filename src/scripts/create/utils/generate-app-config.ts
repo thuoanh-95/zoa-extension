@@ -10,6 +10,7 @@ export default function generateAppConfig(options) {
     {
       app: appConfig,
       debug: false,
+      zones:["admin-dashboard-primary-area-block"],
       listCSS: [],
       listSyncJS: [],
       listAsyncJS: [],
