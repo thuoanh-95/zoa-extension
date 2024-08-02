@@ -19,7 +19,7 @@ export default function (options: any) {
 
   toCopy.push({
     content: generateVite(options),
-    to: path.resolve(cwd, "vite.config.js"),
+    to: path.resolve(cwd, "vite.config.mjs"),
   });
 
   return toCopy;

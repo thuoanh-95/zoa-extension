@@ -6,22 +6,21 @@ export default function generateAppConfig(options) {
     title: name,
   };
   // Content
-  const content = JSON.stringify(
-    {
-      app: appConfig,
-      debug: false,
-      zones:["admin-dashboard-primary-area-block"],
-      listCSS: [],
-      listSyncJS: [],
-      listAsyncJS: [],
+  const content = JSON.stringify({
+    app: appConfig,
+    debug: false,
+    zones: {
+      "admin-dashboard-primary-area-block": {
+        enable: true,
+      },
     },
-  ).trim();
-  
+    listCSS: [],
+    listSyncJS: [],
+    listAsyncJS: [],
+  }).trim();
 
   return {
     content,
     appConfig,
   };
 }
-
-

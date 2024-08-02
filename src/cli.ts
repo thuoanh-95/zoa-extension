@@ -116,18 +116,21 @@ program
     const currentProject = getCurrentProject(cwd);
 
     if (!currentProject) {
-      log.text(`${logSymbols.error} This is not ZMP project`);
+      log.text(`${logSymbols.error} This is not ZOA Extension project`);
       process.exit(1);
     }
-    await startApp(
-      {
-        cwd,
-        port: (options && options.port) || 3000,
-        mode: options && options.mode,
-      },
-      logger
-    );
-    process.exit(0);
+    try {
+      await startApp(
+        {
+          cwd,
+          port: (options && options.port) || 3000,
+          mode: options && options.mode,
+        },
+        logger
+      );
+    } catch (err) {
+      process.exit(err);
+    }
   });
 
 program

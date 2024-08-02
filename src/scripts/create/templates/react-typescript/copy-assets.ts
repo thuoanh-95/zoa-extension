@@ -20,7 +20,7 @@ export default function (options: any) {
 
   toCopy.push({
     content: generateVite(options),
-    to: path.resolve(cwd, "vite.config.ts"),
+    to: path.resolve(cwd, "vite.config.mts"),
   });
 
   toCopy.push({

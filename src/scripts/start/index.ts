@@ -50,10 +50,10 @@ export default async function (
     },
   };
 
-  let viteConfig = "vite.config.js";
-  const isTypeScriptProject = fse.existsSync(path.join(cwd, "vite.config.ts"));
+  let viteConfig = "vite.config.mjs";
+  const isTypeScriptProject = fse.existsSync(path.join(cwd, "vite.config.mts"));
   if (isTypeScriptProject) {
-    viteConfig = "vite.config.ts";
+    viteConfig = "vite.config.mts";
   }
 
   try {
@@ -61,6 +61,7 @@ export default async function (
       configFile: path.join(cwd, viteConfig),
       root: cwd,
       mode,
+
       define: {
         "process.env.NODE_ENV": JSON.stringify(mode),
       },
@@ -72,14 +73,16 @@ export default async function (
 
     await server.listen();
     const info = server.config.logger.info;
-    info(chalk.green(`Server is running at: ${port}`));
-    server?.printUrls();
     
+    info(chalk.green(`Server is running at: ${port}`));
+    server.printUrls();
+    server.bindCLIShortcuts({ print: true });
+    spinner.stop();
   } catch (err) {
     logger.statusError("Error starting project");
-    // if (err) logger.error(err.stderr || err);
-    // logger.error(err);
-    // errorExit(err);
+    if (err) logger.error(err.stderr || err);
+    logger.error(err);
+    errorExit(err);
     return;
   }
 }
