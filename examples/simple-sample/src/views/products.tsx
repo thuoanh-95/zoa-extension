@@ -7,7 +7,7 @@ export default function Products() {
     console.log('zoaSdk', (window as any)?.zoaSdk);
     (window as any)?.zoaSdk?.openModal({
       title: item.name,
-      path: `/extensions/3126224783690575731/products/${item.id}`,
+      path: `/extension/${process.env.APP_ID}/products/${item.id}`,
       height: 800,
       width: 800
     });

@@ -42,7 +42,6 @@ async function uploadChunk(data, filename, option = {}, headers = {}) {
     formData.append(key, value as any);
   }
 
-  console.log(formData);
   return await axiosClient.post(
     config.api_domain + "/api/app-versions/deploy",
     formData,
@@ -95,7 +94,6 @@ export default async function deployApp(
       Authorization: `Bearer ${getEnv(config.env.token)}`,
     });
   } catch (err) {
-    console.log(err.response);
     logger.statusError("Error deploying your app");
     errorExit(err);
   }

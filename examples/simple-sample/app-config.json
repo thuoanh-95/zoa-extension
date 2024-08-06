@@ -1,3 +1,14 @@
 {
-    "appName": "example"
+    "appName": "example",
+    "zones": {
+        "admin-dashboard-primary-area-block": {
+            "enable": true
+        },
+        "admin-chat-message-profile-block": {
+            "enable": true,
+            "roles": [
+                "admin"
+            ]
+        }
+    }
 }

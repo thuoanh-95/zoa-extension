@@ -6,21 +6,25 @@ export default function generateAppConfig(options) {
     title: name,
   };
   // Content
-  const content = JSON.stringify(
-    {
-      app: appConfig,
-      debug: false,
-      listCSS: [],
-      listSyncJS: [],
-      listAsyncJS: [],
+  const content = JSON.stringify({
+    app: appConfig,
+    debug: false,
+    zones: {
+      "admin-dashboard-primary-area-block": {
+        enable: true,
+      },
+      "admin-chat-message-profile-block": {
+        enable: true,
+        roles: ["MANAGER", "MODERATOR"],
+      },
     },
-  ).trim();
-  
+    listCSS: [],
+    listSyncJS: [],
+    listAsyncJS: [],
+  }).trim();
 
   return {
     content,
     appConfig,
   };
 }
-
-

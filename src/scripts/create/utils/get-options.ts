@@ -3,7 +3,7 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 import { projectFramework } from "../../../config/constant";
 
-// const moreOptionsText = chalk.italic(`\t- Including Tailwind CSS`);
+
 const questions = [
   {
     type: "list",
