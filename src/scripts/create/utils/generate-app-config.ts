@@ -13,6 +13,10 @@ export default function generateAppConfig(options) {
       "admin-dashboard-primary-area-block": {
         enable: true,
       },
+      "admin-chat-message-profile-block": {
+        enable: true,
+        roles: ["MANAGER", "MODERATOR"],
+      },
     },
     listCSS: [],
     listSyncJS: [],
