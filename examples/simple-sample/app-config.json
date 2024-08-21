@@ -6,6 +6,7 @@
         },
         "admin-chat-message-profile-block": {
             "enable": true,
+            "hideTitle": false,
             "roles": [
                 "admin"
             ]

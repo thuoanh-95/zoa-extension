@@ -94,7 +94,8 @@ export default async function deployApp(
       Authorization: `Bearer ${getEnv(config.env.token)}`,
     });
   } catch (err) {
-    logger.statusError("Error deploying your app");
+    console.log(err);
+    logger.statusError("Error deploying your app", err);
     errorExit(err);
   }
 }

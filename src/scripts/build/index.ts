@@ -70,6 +70,15 @@ export default async function buildApp(
       ? "vite.config.ts"
       : "vite.config.js";
 
+    if (
+      fse.existsSync("vite.config.mts") ||
+      fse.existsSync("vite.config.mjs")
+    ) {
+      viteConfig = fse.existsSync("vite.config.mts")
+        ? "vite.config.mts"
+        : "vite.config.mjs";
+    }
+
     const res = await build({
       configFile: path.join(cwd, viteConfig),
       root: cwd,

@@ -3,8 +3,15 @@ import data from '../data/products.json'
 
 
 export default function Products() {
+
   const onClickViewDetail = (item) => {
-    console.log('zoaSdk', (window as any)?.zoaSdk);
+
+    (window as any)?.zoaSdk?.getSessionInfo((data,error) => { 
+      console.log(data)
+    });
+
+
+
     (window as any)?.zoaSdk?.openModal({
       title: item.name,
       path: `/extension/${process.env.APP_ID}/products/${item.id}`,
